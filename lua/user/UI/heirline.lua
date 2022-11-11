@@ -147,16 +147,18 @@ local FileName = {
         if self.lfilename == "" then self.lfilename = "[No Name]" end
     end,
     hl = { fg = utils.get_highlight("Directory").fg },
+    flexible = 2,
 
-    utils.make_flexible_component(2, {
+    {
         provider = function(self)
             return self.lfilename
         end,
-    }, {
+    },
+    {
         provider = function(self)
             return vim.fn.pathshorten(self.lfilename)
         end,
-    }),
+    },
 }
 local FileFlags = {
     {
@@ -187,23 +189,27 @@ local WorkDir = {
     end,
     hl = { fg = "blue", bold = true },
 
-    utils.make_flexible_component(1, {
+    flexible = 1,
+
+    {
         -- evaluates to the full-lenth path
         provider = function(self)
             local trail = self.cwd:sub(-1) == "/" and "" or "/"
             return self.icon .. self.cwd .. trail .. " "
         end,
-    }, {
+    },
+    {
         -- evaluates to the shortened path
         provider = function(self)
             local cwd = vim.fn.pathshorten(self.cwd)
             local trail = self.cwd:sub(-1) == "/" and "" or "/"
             return self.icon .. cwd .. trail .. " "
         end,
-    }, {
+    },
+    {
         -- evaluates to "", hiding the component
         provider = "",
-    }),
+    }
 }
 
 local FileNameModifer = {

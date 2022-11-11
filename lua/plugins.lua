@@ -17,7 +17,6 @@ return require('packer').startup(function(use)
   -- [LSP]
   use 'neovim/nvim-lspconfig'
   use 'folke/lsp-colors.nvim'
-  use 'ray-x/lsp_signature.nvim'
   use 'L3MON4D3/LuaSnip'
   use 'williamboman/mason.nvim'
   use 'williamboman/mason-lspconfig.nvim'
@@ -42,7 +41,7 @@ return require('packer').startup(function(use)
 
   -- [TreeSitter] Done
   use 'nvim-treesitter/nvim-treesitter'
-  use 'nvim-treesitter/nvim-treesitter-textobjects'
+  -- use 'nvim-treesitter/nvim-treesitter-textobjects'
   use 'RRethy/nvim-treesitter-textsubjects'
   use 'kylechui/nvim-surround'
   use 'JoosepAlviste/nvim-ts-context-commentstring'

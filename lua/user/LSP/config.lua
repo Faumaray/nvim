@@ -58,6 +58,49 @@ M.servers = {
 					importGranularity = "module",
 					importPrefix = "self",
 				},
+				semanticHighlighting = {
+					operator = {
+						specialization = {
+							enable = true
+						}
+					}
+				},
+				lens = {
+					enable = true,
+					references = {
+						adt = {
+							enable = true
+						},
+						enumVariant = {
+							enable = true
+						},
+						method = {
+							enable = true
+						},
+						trait = {
+							enable = true
+						}
+					}
+				},
+				inlayHints = {
+					bindingModeHints = {
+						enable = true
+					},
+					closureReturnTypeHints = {
+						enable = true
+					},
+					expressionAdjustmentHints = {
+						enable = true
+					},
+					lifetimeElisionHints = {
+						enable = true,
+						useParameterNames = true
+					},
+
+				},
+				diagnostics = {
+					experimental = { enable = true }
+				},
 				cargo = {
 					loadOutDirsFromCheck = true,
 				},
@@ -307,7 +350,7 @@ local severity = {
 	"error",
 	"warn",
 	"info",
-	"hint"
+	"info"
 }
 vim.lsp.handlers["window/showMessage"] = function(err, method, params, client_id)
 	vim.notify(method.message, severity[params.type])
@@ -386,12 +429,6 @@ local opts = { noremap = true, silent = true }
 local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 M.on_attach = function(client, bufnr)
 	require("colorizer").attach_to_buffer(bufnr, { mode = "background", css = true })
-	require("lsp_signature").on_attach({
-		bind = true, -- This is mandatory, otherwise border config won't get registered.
-		handler_opts = {
-			border = "rounded"
-		}
-	}, bufnr)
 	vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 	vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
 	vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
@@ -412,6 +449,17 @@ M.on_attach = function(client, bufnr)
 	vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
 	vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
 	vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
+	vim.keymap.set("n", "<c-f>", function()
+		if not require("noice.lsp").scroll(4) then
+			return "<c-f>"
+		end
+	end, { silent = true, expr = true })
+
+	vim.keymap.set("n", "<c-b>", function()
+		if not require("noice.lsp").scroll(-4) then
+			return "<c-b>"
+		end
+	end, { silent = true, expr = true })
 	-- vim.keymap.set('n', '<space>f', vim.lsp.buf.formatting, bufopts)
 	-- vim.api.nvim_create_autocmd("CursorHold", {
 	-- 	buffer = bufnr,

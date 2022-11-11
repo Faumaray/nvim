@@ -92,9 +92,9 @@ utils.o.smarttab                 = true
 utils.o.shiftwidth               = 4
 utils.o.softtabstop              = 4
 utils.o.tabstop                  = 4
-utils.o.cmdheight                = 0
+-- utils.o.cmdheight                = 0
 -- utils.o.ls                       = 0
-utils.o.ch                       = 0
+-- utils.o.ch                       = 0
 -- Buffer Local Options
 utils.bo.autoindent              = true
 utils.bo.expandtab               = true

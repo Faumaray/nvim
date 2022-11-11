@@ -3,15 +3,15 @@ require("lsp_lines").setup()
 require("colorizer").setup()
 
 -- Default options:
-require('kanagawa').setup({
- globalStatus = true, -- adjust window separators highlight for laststatus=3
- terminalColors = true, -- define vim.g.terminal_color_{0,17}
- theme = "default" -- Load "default" theme or the experimental "light" theme
-})
---vim.cmd("colorscheme kanagawa")
--- vim.cmd("colorscheme aurora")
+-- require('kanagawa').setup({
+--  globalStatus = true, -- adjust window separators highlight for laststatus=3
+--  terminalColors = true, -- define vim.g.terminal_color_{0,17}
+--  theme = "default" -- Load "default" theme or the experimental "light" theme
+-- })
+-- vim.cmd("colorscheme kanagawa")
+vim.cmd("colorscheme aurora")
 
-vim.cmd("colorscheme oxocarbon")
+-- vim.cmd("colorscheme oxocarbon")
 require('hlslens').setup({
  calm_down = true,
  nearest_only = true,
